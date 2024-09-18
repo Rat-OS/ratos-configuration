@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# shellcheck source=./scripts/ratos-common.sh
+source "$SCRIPT_DIR"/ratos-common.sh
+
 MCU=$1
 if [ "$EUID" -ne 0 ]
   then echo "ERROR: Please run as root"
@@ -8,7 +12,7 @@ if [ "$MCU" == "" ]; then
 	echo "ERROR: Please specify a device to flash"
 	exit 1
 fi
-pushd /home/pi/klipper || exit
+pushd ${KLIPPER_DIR} || exit
 service klipper stop
 dfuDevicesPreFlash=$(lsusb | grep -c "0483:df11")
 if [ -h "$MCU" ]; then
@@ -35,7 +39,7 @@ if [ $retVal -eq 0 ]; then
 else
 	echo "Flashing failed."
 fi
-chown pi:pi -R /home/pi/klipper
+chown ${RATOS_USERNAME}:${RATOS_USERGROUP} -R ${KLIPPER_DIR}
 service klipper start
 popd || exit
 exit $retVal

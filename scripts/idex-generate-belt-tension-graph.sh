@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# shellcheck source=./scripts/ratos-common.sh
+source "$SCRIPT_DIR"/ratos-common.sh
+
 DISABLE_Y=0
 DISABLE_X=0
 
@@ -12,9 +15,9 @@ then
 	DISABLE_X=1
 fi
 
-if [ ! -d "/home/pi/printer_data/config/input_shaper" ]
+if [ ! -d "${RATOS_PRINTER_DATA_DIR}/config/input_shaper" ]
 then
-    mkdir /home/pi/printer_data/config/input_shaper
+    mkdir ${RATOS_PRINTER_DATA_DIR}/config/input_shaper
 fi
 
 T0=1
@@ -80,7 +83,7 @@ then
 		fi
 	fi
 
-	/home/pi/klipper/scripts/graph_accelerometer.py -c /tmp/*_y_belt_tension.csv -o /home/pi/printer_data/config/input_shaper/y_tension_comparison_"$DATE".png
+	${KLIPPER_DIR}/scripts/graph_accelerometer.py -c /tmp/*_y_belt_tension.csv -o ${RATOS_PRINTER_DATA_DIR}/config/input_shaper/y_tension_comparison_"$DATE".png
 fi
 if [ $DISABLE_X -eq 0 ]
 then
@@ -107,5 +110,5 @@ then
 		mv /tmp/raw_data_x_toolboard_t1_t1.csv /tmp/right_x_belt_tension.csv
 	fi
 
-	/home/pi/klipper/scripts/graph_accelerometer.py -c /tmp/*_x_belt_tension.csv -o /home/pi/printer_data/config/input_shaper/x_tension_comparison_"$DATE".png
+	${KLIPPER_DIR}/scripts/graph_accelerometer.py -c /tmp/*_x_belt_tension.csv -o ${RATOS_PRINTER_DATA_DIR}/config/input_shaper/x_tension_comparison_"$DATE".png
 fi

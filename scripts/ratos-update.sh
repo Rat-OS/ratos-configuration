@@ -14,7 +14,7 @@ update_symlinks()
 {
   echo "Updating RatOS device symlinks.."
   rm /etc/udev/rules.d/98-*.rules
-  ln -s /home/pi/printer_data/config/RatOS/boards/*/*.rules /etc/udev/rules.d/
+  ln -s ${RATOS_PRINTER_DATA_DIR}/config/RatOS/boards/*/*.rules /etc/udev/rules.d/
 }
 
 ensure_node_18()
@@ -34,8 +34,8 @@ ensure_node_18()
 
 fix_klippy_env_ownership()
 {
-	if [ -n "$(find /home/pi/klippy-env/lib/python3.9/site-packages/matplotlib -user "root" -print -prune -o -prune)" ]; then
-		chown -R pi:pi /home/pi/klippy-env
+	if [ -n "$(find ${KLIPPER_ENV}/lib/python3.9/site-packages/matplotlib -user "root" -print -prune -o -prune)" ]; then
+		chown -R ${RATOS_USERNAME}:${RATOS_USERGROUP} ${KLIPPER_ENV}
 	fi
 }
 

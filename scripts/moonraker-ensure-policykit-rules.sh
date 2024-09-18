@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# shellcheck source=./scripts/ratos-common.sh
+source "$SCRIPT_DIR"/ratos-common.sh
+
 POLKIT_LEGACY_DIR="/etc/polkit-1/localauthority/50-local.d"
 POLKIT_DIR="/etc/polkit-1/rules.d"
 POLKIT_USR_DIR="/usr/share/polkit-1/rules.d"
@@ -20,9 +23,9 @@ ensure_moonraker_policiykit_rules() {
 		echo -e "\n\n###### Moonraker legacy policy exists, skipping policykit script."
 		return
 	fi
-	if [[ -e /home/pi/moonraker/scripts/set-policykit-rules.sh ]]
+	if [[ -e ${MOONRAKER_DIR}/scripts/set-policykit-rules.sh ]]
 	then
-		cp /home/pi/moonraker/scripts/set-policykit-rules.sh /tmp/set-policykit-rules.sh
+		cp ${MOONRAKER_DIR}/scripts/set-policykit-rules.sh /tmp/set-policykit-rules.sh
 		# if moonraker restarts the update process will be terminated, leaving a broken moonraker install.
 		sed -i 's/sudo systemctl restart moonraker/#sudo systemctl restart moonraker/g' /tmp/set-policykit-rules.sh
 		#sed -i ':a;N;$!ba;s/verify_ready\n/#verify_ready\n/g' /tmp/set-policykit-rules.sh
@@ -30,7 +33,7 @@ ensure_moonraker_policiykit_rules() {
 		if [ "$EUID" -eq 0 ]; then
 			# This feels wrong, but...
 			OLDUSER=$USER
-			USER=pi
+			USER=${RATOS_USERNAME}
 			/tmp/set-policykit-rules.sh --root
 			USER=$OLDUSER
 		else

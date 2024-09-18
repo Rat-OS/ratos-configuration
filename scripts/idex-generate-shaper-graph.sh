@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# shellcheck source=./scripts/ratos-common.sh
+source "$SCRIPT_DIR"/ratos-common.sh
+
 DISABLE_Y=0
 DISABLE_X=0
 
@@ -12,9 +15,9 @@ then
 	DISABLE_X=1
 fi
 
-if [ ! -d "/home/pi/printer_data/config/input_shaper" ]
+if [ ! -d "${RATOS_PRINTER_DATA_DIR}/config/input_shaper" ]
 then
-    mkdir /home/pi/printer_data/config/input_shaper
+    mkdir ${RATOS_PRINTER_DATA_DIR}/config/input_shaper
 fi
 
 T0=1
@@ -59,7 +62,7 @@ then
 			fi
 			mv "/tmp/resonances_y_$4_$5_$6_t0.csv" /tmp/t0_y.csv
 			echo "please wait..."
-			/home/pi/klipper/scripts/calibrate_shaper.py /tmp/t0_y.csv -o /home/pi/printer_data/config/input_shaper/t0_resonances_y_"$DATE".png
+			${KLIPPER_DIR}/scripts/calibrate_shaper.py /tmp/t0_y.csv -o ${RATOS_PRINTER_DATA_DIR}/config/input_shaper/t0_resonances_y_"$DATE".png
 		fi
 
 		if [ $T1 -eq 1 ]
@@ -71,7 +74,7 @@ then
 			fi
 			mv "/tmp/resonances_y_$4_$5_$6_t1.csv" /tmp/t1_y.csv
 			echo "please wait..."
-			/home/pi/klipper/scripts/calibrate_shaper.py /tmp/t1_y.csv -o /home/pi/printer_data/config/input_shaper/t1_resonances_y_"$DATE".png
+			${KLIPPER_DIR}/scripts/calibrate_shaper.py /tmp/t1_y.csv -o ${RATOS_PRINTER_DATA_DIR}/config/input_shaper/t1_resonances_y_"$DATE".png
 		fi
 	fi
 
@@ -86,7 +89,7 @@ then
 			fi
 			echo "please wait..."
 			mv "/tmp/resonances_y_$4_$5_$6_t0_copy.csv" /tmp/t0_copy_y.csv
-			[ -e "/tmp/t0_copy_y.csv" ] && /home/pi/klipper/scripts/calibrate_shaper.py /tmp/t0_copy_y.csv -o /home/pi/printer_data/config/input_shaper/t0_copy_resonances_y_"$DATE".png
+			[ -e "/tmp/t0_copy_y.csv" ] && ${KLIPPER_DIR}/scripts/calibrate_shaper.py /tmp/t0_copy_y.csv -o ${RATOS_PRINTER_DATA_DIR}/config/input_shaper/t0_copy_resonances_y_"$DATE".png
 		fi
 		if [ $T1 -eq 1 ]
 		then
@@ -97,7 +100,7 @@ then
 			fi
 			echo "please wait..."
 			mv "/tmp/resonances_y_$4_$5_$6_t1_copy.csv" /tmp/t1_copy_y.csv
-			[ -e "/tmp/t1_copy_y.csv" ] && /home/pi/klipper/scripts/calibrate_shaper.py /tmp/t1_copy_y.csv -o /home/pi/printer_data/config/input_shaper/t1_copy_resonances_y_"$DATE".png
+			[ -e "/tmp/t1_copy_y.csv" ] && ${KLIPPER_DIR}/scripts/calibrate_shaper.py /tmp/t1_copy_y.csv -o ${RATOS_PRINTER_DATA_DIR}/config/input_shaper/t1_copy_resonances_y_"$DATE".png
 		fi
 	fi
 
@@ -112,7 +115,7 @@ then
 			fi
 			echo "please wait..."
 			mv "/tmp/resonances_y_$4_$5_$6_t0_mirror.csv" /tmp/t0_mirror_y.csv
-			[ -e "/tmp/t0_mirror_y.csv" ] && /home/pi/klipper/scripts/calibrate_shaper.py /tmp/t0_mirror_y.csv -o /home/pi/printer_data/config/input_shaper/t0_mirror_resonances_y_"$DATE".png
+			[ -e "/tmp/t0_mirror_y.csv" ] && ${KLIPPER_DIR}/scripts/calibrate_shaper.py /tmp/t0_mirror_y.csv -o ${RATOS_PRINTER_DATA_DIR}/config/input_shaper/t0_mirror_resonances_y_"$DATE".png
 		fi
 		if [ $T1 -eq 1 ]
 		then
@@ -123,7 +126,7 @@ then
 			fi
 			echo "please wait..."
 			mv "/tmp/resonances_y_$4_$5_$6_t1_mirror.csv" /tmp/t1_mirror_y.csv
-			[ -e "/tmp/t1_mirror_y.csv" ] && /home/pi/klipper/scripts/calibrate_shaper.py /tmp/t1_mirror_y.csv -o /home/pi/printer_data/config/input_shaper/t1_mirror_resonances_y_"$DATE".png
+			[ -e "/tmp/t1_mirror_y.csv" ] && ${KLIPPER_DIR}/scripts/calibrate_shaper.py /tmp/t1_mirror_y.csv -o ${RATOS_PRINTER_DATA_DIR}/config/input_shaper/t1_mirror_resonances_y_"$DATE".png
 		fi
 	fi
 fi
@@ -149,7 +152,7 @@ then
 			fi
 			mv "/tmp/resonances_x_$4_$5_$6_t0.csv" /tmp/t0_x.csv
 			echo "please wait..."
-			/home/pi/klipper/scripts/calibrate_shaper.py /tmp/t0_x.csv -o /home/pi/printer_data/config/input_shaper/t0_resonances_x_"$DATE".png
+			${KLIPPER_DIR}/scripts/calibrate_shaper.py /tmp/t0_x.csv -o ${RATOS_PRINTER_DATA_DIR}/config/input_shaper/t0_resonances_x_"$DATE".png
 		fi
 
 		if [ $T1 -eq 1 ]
@@ -161,7 +164,7 @@ then
 			fi
 			mv "/tmp/resonances_x_$4_$5_$6_t1.csv" /tmp/t1_x.csv
 			echo "please wait..."
-			/home/pi/klipper/scripts/calibrate_shaper.py /tmp/t1_x.csv -o /home/pi/printer_data/config/input_shaper/t1_resonances_x_"$DATE".png
+			${KLIPPER_DIR}/scripts/calibrate_shaper.py /tmp/t1_x.csv -o ${RATOS_PRINTER_DATA_DIR}/config/input_shaper/t1_resonances_x_"$DATE".png
 		fi
 	fi
 
@@ -176,7 +179,7 @@ then
 			fi
 			echo "please wait..."
 			mv "/tmp/resonances_x_$4_$5_$6_t0_copy.csv" /tmp/t0_copy_x.csv
-			[ -e "/tmp/t0_copy_x.csv" ] && /home/pi/klipper/scripts/calibrate_shaper.py /tmp/t0_copy_x.csv -o /home/pi/printer_data/config/input_shaper/t0_copy_resonances_x_"$DATE".png
+			[ -e "/tmp/t0_copy_x.csv" ] && ${KLIPPER_DIR}/scripts/calibrate_shaper.py /tmp/t0_copy_x.csv -o ${RATOS_PRINTER_DATA_DIR}/config/input_shaper/t0_copy_resonances_x_"$DATE".png
 		fi
 		if [ $T1 -eq 1 ]
 		then
@@ -187,7 +190,7 @@ then
 			fi
 			echo "please wait..."
 			mv "/tmp/resonances_x_$4_$5_$6_t1_copy.csv" /tmp/t1_copy_x.csv
-			[ -e "/tmp/t1_copy_x.csv" ] && /home/pi/klipper/scripts/calibrate_shaper.py /tmp/t1_copy_x.csv -o /home/pi/printer_data/config/input_shaper/t1_copy_resonances_x_"$DATE".png
+			[ -e "/tmp/t1_copy_x.csv" ] && ${KLIPPER_DIR}/scripts/calibrate_shaper.py /tmp/t1_copy_x.csv -o ${RATOS_PRINTER_DATA_DIR}/config/input_shaper/t1_copy_resonances_x_"$DATE".png
 		fi
 	fi
 
@@ -202,7 +205,7 @@ then
 			fi
 			echo "please wait..."
 			mv "/tmp/resonances_x_$4_$5_$6_t0_mirror.csv" /tmp/t0_mirror_x.csv
-			[ -e "/tmp/t0_mirror_x.csv" ] && /home/pi/klipper/scripts/calibrate_shaper.py /tmp/t0_mirror_x.csv -o /home/pi/printer_data/config/input_shaper/t0_mirror_resonances_x_"$DATE".png
+			[ -e "/tmp/t0_mirror_x.csv" ] && ${KLIPPER_DIR}/scripts/calibrate_shaper.py /tmp/t0_mirror_x.csv -o ${RATOS_PRINTER_DATA_DIR}/config/input_shaper/t0_mirror_resonances_x_"$DATE".png
 		fi
 		if [ $T1 -eq 1 ]
 		then
@@ -213,7 +216,7 @@ then
 			fi
 			echo "please wait..."
 			mv "/tmp/resonances_x_$4_$5_$6_t1_mirror.csv" /tmp/t1_mirror_x.csv
-			[ -e "/tmp/t1_mirror_x.csv" ] && /home/pi/klipper/scripts/calibrate_shaper.py /tmp/t1_mirror_x.csv -o /home/pi/printer_data/config/input_shaper/t1_mirror_resonances_x_"$DATE".png
+			[ -e "/tmp/t1_mirror_x.csv" ] && ${KLIPPER_DIR}/scripts/calibrate_shaper.py /tmp/t1_mirror_x.csv -o ${RATOS_PRINTER_DATA_DIR}/config/input_shaper/t1_mirror_resonances_x_"$DATE".png
 		fi
 	fi
 fi
