@@ -15,7 +15,7 @@ RATOS_USERGROUP="pi"
 RATOS_PRINTER_DATA_DIR="/home/${RATOS_USERNAME}/printer_data"
 MOONRAKER_DIR="/home/${RATOS_USERNAME}/moonraker"
 KLIPPER_DIR="/home/${RATOS_USERNAME}/klipper"
-${RATOS_PRINTER_DATA_DIR}="/home/${RATOS_USERNAME}/klippy-env"
+KLIPPER_ENV="/home/${RATOS_USERNAME}/klippy-env"
 BEACON_DIR="/home/${RATOS_USERNAME}/beacon"
 EOF
 fi
