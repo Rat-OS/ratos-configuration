@@ -7,19 +7,13 @@
 	"firmwareBinaryName": "firmware-ldo-orbitool-o2.bin",
 	"boardImageFileName": "board.webp",
 	"compileScript": "compile.sh",
+	"thermistorPullup": 2200,
 	"flashScript": "flash.sh",
 	"documentationLink": "https://os.ratrig.com/docs/boards/ldo/orbitool-o2",
 	"disableAutoFlash": true,
 	"driverVoltages": [24],
 	"hasMcuTempSensor": true,
-	"invertPinLogic": ["PA9", "PA4"],
-	"outputPins": [
-		{
-			"name": "hotend_power",
-			"pin": "PA10",
-			"value": 0
-		}
-	],
+	"invertPinLogic": ["PA9"],
 	"driverCount": 1,
 	"integratedDrivers": {
 		"extruder": "LDO-TMC2209"
@@ -38,10 +32,8 @@
 	},
 	"LIS2DW": {
 		"cs_pin": "PA4",
-		"software": {
-			"sclk": "PA5",
-			"mosi": "PA7",
-			"miso": "PA6"
+		"hardware": {
+			"bus": "spi1"
 		}
 	},
 	"customSections": {
@@ -61,7 +53,8 @@
 		},
 		"fan": {
 			"parameters": {
-				"max_power": 0.995
+				"max_power": 0.995,
+				"shutdown_speed": 0.0
 			}
 		},
 		"heater_fan": {
@@ -69,7 +62,16 @@
 			"comments": ["Use max_power: 0.5 for 12V, max_power: 1 for 24V (in printer.cfg)"],
 			"parameters": {
 				"max_power": 0.995,
-				"cycle_time": 0.0001
+				"cycle_time": 0.0001,
+				"shutdown_speed": 0.0
+			}
+		},
+		"output_pin": {
+			"name": "O2_RUN_LED",
+			"parameters": {
+				"pin": "PB8",
+				"shutdown_value": 0,
+				"value": 1
 			}
 		},
 		"temperature_sensor": {

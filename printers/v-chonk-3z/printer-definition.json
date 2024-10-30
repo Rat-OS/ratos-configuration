@@ -1,32 +1,22 @@
 {
 	"$schema": "../printer-definition.schema.json",
-	"name": "V-Core 3",
-	"description": "Rat Rig's former flagship CoreXY printer in 4 sizes",
+	"name": "V-Chonk 3Z (BETA)",
+	"description": "Mostly 3d printed, \"use what you've got\" 3d printer, Rat Rig style. This variant uses 6 drivers for z-tilt leveling.",
 	"manufacturer": "Rat Rig",
-	"documentationLink": "https://os.ratrig.com/docs/printers/v-core-3",
-	"image": "rat-rig-v-core-3.png",
-	"template": "v-core-3-printer.template.cfg",
+	"releaseDate": "2024-02-23",
+	"documentationLink": "https://www.ratrig.com",
+	"image": "v-chonk.png",
+	"template": "v-chonk-3z-printer.template.cfg",
 	"driverCountRequired": 6,
+	"bedMargin": {
+		"x": [0, 0],
+		"y": [15, 0]
+	},
 	"sizes": {
-		"200": {
-			"x": 200,
-			"y": 200,
-			"z": 200
-		},
-		"300": {
-			"x": 300,
-			"y": 300,
-			"z": 300
-		},
-		"400": {
-			"x": 400,
-			"y": 400,
-			"z": 400
-		},
-		"500": {
-			"x": 500,
-			"y": 500,
-			"z": 500
+		"180": {
+			"x": 180,
+			"y": 180,
+			"z": 180
 		}
 	},
 	"speedLimits": {
@@ -34,37 +24,40 @@
 			"accel": 3000,
 			"velocity": 300,
 			"z_accel": 50,
-			"z_velocity": 30,
+			"z_velocity": 10,
 			"travel_accel": 3000,
 			"travel_velocity": 300
 		},
 		"performance": {
 			"accel": 10000,
 			"velocity": 800,
-			"z_accel": 600,
-			"z_velocity": 50,
+			"z_accel": 200,
+			"z_velocity": 15,
 			"travel_velocity": 600,
 			"travel_accel": 8000
 		}
 	},
+	"kinematics": "corexy",
 	"defaults": {
-		"board": "btt-octopus-11",
+		"board": "btt-skrat-10",
 		"toolheads": [
 			{
 				"axis": "x",
-				"extruder": "lgx-lite",
+				"description": "The toolhead for the printer",
+				"extruder": "orbiter-2",
+				"toolboard": "btt-ebb42-12",
 				"hotend": "rapido",
 				"partFan": "4pin",
-				"hotendFan": "2pin",
+				"hotendFan": "2pin-toolboard",
 				"probe": "superpinda",
-				"xEndstop": "endstop",
-				"yEndstop": "endstop"
+				"xEndstop": "sensorless",
+				"yEndstop": "sensorless"
 			}
 		],
 		"rails": [
 			{
 				"axis": "x",
-				"axisDescription": "The A motor in the CoreXY system, located at the rear left of the printer",
+				"axisDescription": "The A axis motor for the toolhead, located at the rear left of the printer",
 				"current": 1.1,
 				"driver": "BTT-TMC2209-13",
 				"stepper": "LDO-42STH48-2504AC",
@@ -76,7 +69,7 @@
 			},
 			{
 				"axis": "y",
-				"axisDescription": "The B motor in the CoreXY system, located at the rear right of the printer",
+				"axisDescription": "The B axis motor for the toolhead, located at the rear right of the printer",
 				"current": 1.1,
 				"driver": "BTT-TMC2209-13",
 				"stepper": "LDO-42STH48-2504AC",
@@ -88,36 +81,33 @@
 			},
 			{
 				"axis": "z",
-				"axisDescription": "The left Z motor for the kinematic bed",
-				"current": 1.1,
+				"axisDescription": "The front left Z motors for the bed",
+				"current": 0.85,
 				"driver": "BTT-TMC2209-13",
-				"stepper": "LDO-42STH48-2504AC",
+				"stepper": "LDO-42STH25-1404MAC",
 				"rotationDistance": 4,
-				"homingSpeed": 10,
-				"performanceMode": {
-					"current": 1.6
-				}
+				"homingSpeed": 10
 			},
 			{
 				"axis": "z1",
-				"axisDescription": "The rear Z motor for the kinematic bed",
-				"current": 1.1,
+				"axisDescription": "The rear Z motor for the bed",
+				"current": 0.85,
 				"driver": "BTT-TMC2209-13",
-				"stepper": "LDO-42STH48-2504AC",
+				"stepper": "LDO-42STH25-1404MAC",
 				"rotationDistance": 4,
 				"performanceMode": {
-					"current": 1.6
+					"current": 1
 				}
 			},
 			{
 				"axis": "z2",
-				"axisDescription": "The right Z motor for the kinematic bed",
-				"current": 1.1,
+				"axisDescription": "The front right Z motor for the bed",
+				"current": 0.85,
 				"driver": "BTT-TMC2209-13",
-				"stepper": "LDO-42STH48-2504AC",
+				"stepper": "LDO-42STH25-1404MAC",
 				"rotationDistance": 4,
 				"performanceMode": {
-					"current": 1.6
+					"current": 1
 				}
 			},
 			{

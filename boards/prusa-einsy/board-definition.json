@@ -7,6 +7,7 @@
 	"firmwareBinaryName": "firmware-prusa-einsy.elf.hex",
 	"driverCount": 4,
 	"driverVoltages": [24],
+	"hasMcuTempSensor": false,
 	"fourPinFanConnectorCount": 2,
 	"integratedDrivers": {
 		"x": "PRUSA-EINSY-RAMBO-TMC2130",

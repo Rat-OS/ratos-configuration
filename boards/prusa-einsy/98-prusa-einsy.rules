@@ -1,4 +1,3 @@
 # Prusa Einsy w/ atmega2560
 SUBSYSTEMS=="usb", ATTRS{idProduct}=="0002", ATTRS{idVendor}=="2c99", ACTION=="add", SYMLINK+="prusa-einsy RatOS/prusa-einsy", RUN+="/home/pi/printer_data/config/RatOS/scripts/klipper-mcu-added.sh"
 
-ACTION=="remove", ENV{DEVLINKS}=="/dev/prusa-einsy"

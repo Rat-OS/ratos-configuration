@@ -127,7 +127,7 @@
 							"patternProperties": {
 								"^\\S+$": {
 									"description": "A parameter and value for this custom section",
-									"oneOf": [{ "type": "number" }, { "type": "string" }]
+									"oneOf": [{ "type": "number" }, { "type": "string" }, { "type": "boolean" }]
 								}
 							}
 						},

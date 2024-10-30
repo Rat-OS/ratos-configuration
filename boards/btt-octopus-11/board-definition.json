@@ -3,7 +3,7 @@
 	"boardImageFileName": "board.webp",
 	"manualFileName": "manual.pdf",
 	"wireDiagramFileName": "wiring.drawio.svg",
-	"name": "Octopus V1.1",
+	"name": "Octopus V1.1 F446",
 	"manufacturer": "BIGTREETECH",
 	"id": "btt-octopus-11",
 	"firmwareBinaryName": "firmware-btt-octopus-11.bin",

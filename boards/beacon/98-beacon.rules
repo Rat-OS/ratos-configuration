@@ -1,4 +1,2 @@
 # Beacon
 SUBSYSTEMS=="usb", ATTRS{idVendor}=="04d8", ATTRS{idProduct}=="e72b", ATTRS{manufacturer}=="Beacon", ACTION=="add", SYMLINK+="beacon", RUN+="/home/pi/printer_data/config/RatOS/scripts/klipper-mcu-added.sh"
-
-ACTION=="remove", ENV{DEVLINKS}=="/dev/beacon"

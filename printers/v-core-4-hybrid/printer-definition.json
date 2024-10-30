@@ -33,7 +33,7 @@
 		"basic": {
 			"accel": 3000,
 			"velocity": 300,
-			"z_accel": 15,
+			"z_accel": 50,
 			"z_velocity": 30,
 			"travel_accel": 3000,
 			"travel_velocity": 300

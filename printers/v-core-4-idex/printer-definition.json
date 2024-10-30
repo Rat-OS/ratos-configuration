@@ -26,14 +26,14 @@
 		}
 	},
 	"bedMargin": {
-		"x": [60, 60],
-		"y": [15, 34]
+		"x": [59.8, 59.8],
+		"y": [14.35, 33.65]
 	},
 	"speedLimits": {
 		"basic": {
 			"accel": 3000,
 			"velocity": 300,
-			"z_accel": 15,
+			"z_accel": 50,
 			"z_velocity": 30,
 			"travel_accel": 3000,
 			"travel_velocity": 300
@@ -84,6 +84,7 @@
 				"driver": "BTT-TMC2209-13",
 				"stepper": "LDO-42STH48-2504AC",
 				"rotationDistance": 40,
+				"microstepping": 16,
 				"homingSpeed": 50,
 				"performanceMode": {
 					"current": 1.6
@@ -96,6 +97,7 @@
 				"driver": "BTT-TMC2209-13",
 				"stepper": "LDO-42STH48-2504AC",
 				"rotationDistance": 40,
+				"microstepping": 16,
 				"homingSpeed": 50,
 				"performanceMode": {
 					"current": 1.6
@@ -108,6 +110,7 @@
 				"driver": "BTT-TMC2209-13",
 				"stepper": "LDO-42STH48-2504AC",
 				"rotationDistance": 40,
+				"microstepping": 16,
 				"homingSpeed": 50,
 				"performanceMode": {
 					"current": 1.6
@@ -120,6 +123,7 @@
 				"driver": "BTT-TMC2209-13",
 				"stepper": "LDO-42STH48-2504AC",
 				"rotationDistance": 40,
+				"microstepping": 16,
 				"homingSpeed": 50,
 				"performanceMode": {
 					"current": 1.6
@@ -132,6 +136,7 @@
 				"driver": "BTT-TMC2209-13",
 				"stepper": "LDO-42STH48-2504AC",
 				"rotationDistance": 4,
+				"microstepping": 16,
 				"homingSpeed": 10,
 				"performanceMode": {
 					"current": 1.6
@@ -144,6 +149,7 @@
 				"driver": "BTT-TMC2209-13",
 				"stepper": "LDO-42STH48-2504AC",
 				"rotationDistance": 4,
+				"microstepping": 16,
 				"performanceMode": {
 					"current": 1.6
 				}
@@ -155,6 +161,7 @@
 				"driver": "BTT-TMC2209-13",
 				"stepper": "LDO-42STH48-2504AC",
 				"rotationDistance": 4,
+				"microstepping": 16,
 				"performanceMode": {
 					"current": 1.6
 				}

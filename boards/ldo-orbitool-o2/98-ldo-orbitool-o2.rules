@@ -1,4 +1,3 @@
 # BTT EBB42 v1.2
 SUBSYSTEMS=="usb", ATTRS{idProduct}=="614e",  ATTRS{idVendor}=="1d50", ATTRS{serial}=="ldo-orbitool-o2", ACTION=="add", SYMLINK+="ldo-orbitool-o2", RUN+="/home/pi/printer_data/config/RatOS/scripts/klipper-mcu-added.sh"
 
-ACTION=="remove", ENV{DEVLINKS}=="/dev/ldo-orbitool-o2"

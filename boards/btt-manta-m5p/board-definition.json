@@ -92,5 +92,6 @@
 			"mosi": "PB15",
 			"miso": "PB14"
 		}
-	}
+	},
+	"extruderlessConfig": "config-3z.cfg"
 }
