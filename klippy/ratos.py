@@ -80,18 +80,18 @@ class RatOS:
 		self.gcode.register_command('BEACON_APPLY_SCAN_COMPENSATION', self.cmd_BEACON_APPLY_SCAN_COMPENSATION, desc=(self.desc_BEACON_APPLY_SCAN_COMPENSATION))
 		self.gcode.register_command('TEST_PROCESS_GCODE_FILE', self.cmd_TEST_PROCESS_GCODE_FILE, desc=(self.desc_TEST_PROCESS_GCODE_FILE))
 
-	desc_TEST_PROCESS_GCODE_FILE = "Test the G-code post processor for IDEX and RMMU, onyl for debugging purposes"
+	desc_TEST_PROCESS_GCODE_FILE = "Test the G-code post-processor for IDEX and RMMU, only for debugging purposes"
 	def cmd_TEST_PROCESS_GCODE_FILE(self, gcmd):
 		dual_carriage = self.dual_carriage
 		self.dual_carriage = True
 		filename = gcmd.get('FILENAME', "")
-		use_new_postprocess = gcmd.get('USE_NEW', "false").lower() == "true"
+		use_legacy_postprocess = gcmd.get('LEGACY', "false").lower() == "true"
 		if filename[0] == '/':
 			filename = filename[1:]
-		if use_new_postprocess:
-			self.process_gcode_file(filename, True)
-		else:
+		if use_legacy_postprocess:
 			self.old_postprocess(filename, True)
+		else:
+			self.process_gcode_file(filename, True)
 		self.dual_carriage = dual_carriage
 
 	desc_HELLO_RATOS = "RatOS mainsail welcome message"
