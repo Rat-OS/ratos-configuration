@@ -253,9 +253,9 @@ class RatOS:
 				# Handle the parsed data
 				if data['result'] == 'error' and 'message' in data:
 					self.last_processed_file_result = None
-					self.console_echo(data['title'], 'alert', data['message'])
+					self.console_echo("Error: " + data['title'], 'alert', data['message'])
 				if data['result'] == 'warning' and 'message' in data:
-					self.console_echo(data['title'], 'warning', data['message'])
+					self.console_echo("Warning: " + data['title'], 'warning', data['message'])
 				if data['result'] == 'success':
 					self.last_processed_file_result = data['payload']
 					if 'wasAlreadyProcessed' in data['payload'] and data['payload']['wasAlreadyProcessed']:
@@ -280,7 +280,7 @@ class RatOS:
 						mins = (eta_secs % 3600) // 60
 						secs = eta_secs % 60
 						eta_str = f"{hours}h {mins}m {secs}s"
-					self.console_echo(f"Post-processing... {data['payload']['percentage']}% {eta_str} remaining", 'info')
+					self.console_echo(f"Post-processing ({data['payload']['percentage']}%)... {eta_str} remaining", 'info')
 
 			def _process_output(eventtime):
 				if process.stdout is None:
