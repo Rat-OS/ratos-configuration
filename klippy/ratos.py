@@ -99,7 +99,7 @@ class RatOS:
 		url = "https://os.ratrig.com/"
 		img = "../server/files/config/RatOS/Logo-white.png"
 		ratos_version = self.get_ratos_version().split('-')
-		_title = '<b><p style="font-weight-bold; margin:0; margin-bottom:0px; color:white">Welcome to RatOS ' +  ratos_version[0] + '</p></b>'
+		_title = '<b><p style="font-weight: bold; margin:0; margin-bottom:0px; color:white">Welcome to RatOS ' +  ratos_version[0] + '</p></b>'
 		_sub_title = '-'.join(ratos_version)
 		_info = '\nClick image to open documentation.'
 		_img = '\n<a href="' + url + '" target="_blank" ><img style="margin-top:6px;" src="' + img + '" width="258px"></a>'
@@ -108,7 +108,7 @@ class RatOS:
 	desc_CONSOLE_ECHO = "Multiline console output"
 	def cmd_CONSOLE_ECHO(self, gcmd):
 		title = gcmd.get('TITLE', '')
-		msg = gcmd.get('MSG', '')
+		msg = gcmd.get('MSG', None)
 		type = gcmd.get('TYPE', '')
 
 		color = "white"
@@ -121,8 +121,11 @@ class RatOS:
 		if type == 'debug': color = "#38bdf8"
 		if type == 'debug': opacity = 0.7
 
-		_title = '<b><p style="font-weight-bold; margin:0; opacity:' + str(opacity) + '; color:' + color + '">' + title + '</p></b>'
-		_msg = '<p style="margin:0; opacity:' + str(opacity) + '; color:' + color + '">' + msg.replace("_N_","\n") + '</p>'
+		_title = '<p style="font-weight: bold; margin:0; opacity:' + str(opacity) + '; color:' + color + '">' + title + '</p>'
+		if msg:
+			_msg = '<p style="margin:0; opacity:' + str(opacity) + '; color:' + color + '">' + msg.replace("_N_","\n") + '</p>'
+		else:
+			_msg = ''
 
 		self.gcode.respond_raw(_title + _msg)
 
@@ -137,7 +140,7 @@ class RatOS:
 					file_name = file_path.replace("/home/pi/printer_data/config/input_shaper/", "")
 					url = file_path.replace("/home/pi/printer_data", "../server/files")
 					title = title + ': ' if title != '' else ''
-					_title = '<b><p style="font-weight-bold; margin:0; color:white">' + title + file_name + '</p></b>'
+					_title = '<p style="font-weight: bold; margin:0; color:white">' + title + file_name + '</p>'
 					_link = 'Click image to download or right click for options.'
 					_img = '<a href="' + url + '" target="_blank" ><img src="' + url + '" width="100%"></a>'
 					self.gcode.respond_raw(_title + _link + _img)
@@ -704,12 +707,12 @@ class RatOS:
 	# Helper
 	#####
 	def ratos_echo(self, prefix, msg):
-		self.gcode.run_script_from_command("RATOS_ECHO PREFIX=" + str(prefix) + " MSG='" + str(msg) + "'")
+		self.gcode.run_script_from_command("RATOS_ECHO PREFIX='" + str(prefix) + "' MSG='" + str(msg) + "'")
 
 	def debug_echo(self, prefix, msg):
-		self.gcode.run_script_from_command("DEBUG_ECHO PREFIX=" + str(prefix) + " MSG='" + str(msg) + "'")
+		self.gcode.run_script_from_command("DEBUG_ECHO PREFIX='" + str(prefix) + "' MSG='" + str(msg) + "'")
 	
-	def console_echo(self, title, type, msg):
+	def console_echo(self, title, type, msg=''):
 		self.gcode.run_script_from_command("CONSOLE_ECHO TITLE='" + str(title) + "' TYPE='" + str(type) + "' MSG='" + str(msg) + "'")
 
 	def get_is_graph_files(self):
