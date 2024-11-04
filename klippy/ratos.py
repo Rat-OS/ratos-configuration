@@ -280,7 +280,10 @@ class RatOS:
 						mins = (eta_secs % 3600) // 60
 						secs = eta_secs % 60
 						eta_str = f"{hours}h {mins}m {secs}s"
-					self.console_echo(f"Post-processing ({data['payload']['percentage']}%)... {eta_str} remaining", 'info')
+					if data['payload']['percentage'] < 100:
+						self.console_echo(f"Post-processing ({data['payload']['percentage']}%)... {eta_str} remaining", 'info')
+					else:
+						self.console_echo(f"Post-processing ({data['payload']['percentage']}%)...", 'info')
 
 			def _process_output(eventtime):
 				if process.stdout is None:
