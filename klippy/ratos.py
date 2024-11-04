@@ -161,7 +161,7 @@ class RatOS:
 		msg = gcmd.get('MSG')
 		logging.info(prefix + ": " + msg)
 
-	desc_PROCESS_GCODE_FILE = "G-code post processor for IDEX and RMMU"
+	desc_PROCESS_GCODE_FILE = "G-code post-processor for IDEX and RMMU"
 	def cmd_PROCESS_GCODE_FILE(self, gcmd):
 		filename = gcmd.get('FILENAME', "")
 		if filename[0] == '/':
@@ -184,7 +184,7 @@ class RatOS:
 				if self.process_gcode_file(filename, True):
 					self.v_sd.cmd_SDCARD_PRINT_FILE(gcmd)
 				else:
-					raise self.printer.command_error("Could not process gcode file using legacy post processor.")
+					raise self.printer.command_error("Could not process gcode file using legacy post-processor.")
 
 	desc_BEACON_APPLY_SCAN_COMPENSATION = "Compensates magnetic inaccuracies for beacon scan meshes."
 	def cmd_BEACON_APPLY_SCAN_COMPENSATION(self, gcmd):
@@ -232,16 +232,14 @@ class RatOS:
 		try:
 			[path, size] = self.get_gcode_file_info(filename)
 			# Start ratos postprocess command
-			args = ['ratos', 'postprocess', '--non-interactive']
+			args = ['ratos', 'postprocess', '--non-interactive', '--overwrite-input']
 			isIdex = self.config.has_section("dual_carriage")
-			if isIdex:
+			if isIdex and enable_post_processing:
 				args.append('--idex')
-			if enable_post_processing:
-				args.append('--overwrite-input')
 			if self.allow_unsupported_slicer_versions:
 				args.append('--allow-unsupported-slicer-versions')
 			args.append(path)
-			self.console_echo('Post processing started', 'info',  'Processing %s (%smb)' % (filename, size / 1024 / 1024));
+			self.console_echo('Post-processing started', 'info',  'Processing %s (%.2f mb)...' % (filename, size / 1024 / 1024));
 			process = subprocess.Popen(
 				args,
 				stdout=subprocess.PIPE,
@@ -253,18 +251,18 @@ class RatOS:
 
 			def _interpret_output(data):
 				# Handle the parsed data
-				if data['result'] == 'error' and 'error' in data:
+				if data['result'] == 'error' and 'message' in data:
 					self.last_processed_file_result = None
-					self.console_echo('An error occurred during post processing', 'alert', data['error'])
-				if data['result'] == 'warning' and 'warning' in data:
-					self.console_echo('A warning occurred during post processing', 'warning', data['warning'])
+					self.console_echo(data['title'], 'alert', data['message'])
+				if data['result'] == 'warning' and 'message' in data:
+					self.console_echo(data['title'], 'warning', data['message'])
 				if data['result'] == 'success':
 					self.last_processed_file_result = data['payload']
 					if 'wasAlreadyProcessed' in data['payload'] and data['payload']['wasAlreadyProcessed']:
-						self.console_echo('Post processing completed', 'success', 'File already processed, continuing...')
+						self.console_echo('Post-processing completed', 'success', 'File already processed, continuing...')
 					else:
 						self.console_echo(
-							'Post processing completed', 'success',
+							'Post-processing completed', 'success',
 							f'Slicer: {data["payload"]["gcodeInfo"]["generator"]} v{data["payload"]["gcodeInfo"]["generatorVersion"]} ' +
 							f'_N_Used tools: T{", T".join(data["payload"]["usedTools"])} ' +
 							f'_N_Toolshifts: {data["payload"]["toolChangeCount"]}'
@@ -282,7 +280,7 @@ class RatOS:
 						mins = (eta_secs % 3600) // 60
 						secs = eta_secs % 60
 						eta_str = f"{hours}h {mins}m {secs}s"
-					self.console_echo('Post-processing progress', 'info', f"Progress: {data['payload']['percentage']}%_N_Estimated time remaining: {eta_str}")
+					self.console_echo(f"Post-processing... {data['payload']['percentage']}% {eta_str} remaining", 'info')
 
 			def _process_output(eventtime):
 				if process.stdout is None:
@@ -352,21 +350,21 @@ class RatOS:
 			return False
 
 	#####
-	# G-code post processor
+	# G-code post-processor
 	#####
 	def old_postprocess(self, filename, enable_post_processing):
 		echo_prefix = "POST_PROCESSOR"
 		try:
 			[path, size] = self.get_gcode_file_info(filename)
 			meminfo = dict((i.split()[0].rstrip(':'),int(i.split()[1])) for i in open('/proc/meminfo').readlines())
-			# check if file is too large for post processing, using a safety margin of 15%
+			# check if file is too large for post-processing, using a safety margin of 15%
 			mem_available = meminfo['MemAvailable'] * 1024 * 0.85
 			if (size > mem_available):
 				if (enable_post_processing):
-					self.ratos_echo(echo_prefix, "File is too large (file is %smb but only %smb of memory is available) for required IDEX post processing. A new post processor is coming soon without this limitation." % (size / 1024 / 1024, mem_available / 1024 / 1024))
-					raise self.printer.command_error("File is too large (file is %smb but only %smb of memory is available) for required IDEX post processing. A new post processor is coming soon without this limitation." % (size / 1024 / 1024, mem_available / 1024 / 1024))
+					self.ratos_echo(echo_prefix, "File is too large (file is %smb but only %smb of memory is available) for required IDEX post-processing. Disable the legacy post-processor to continue." % (size / 1024 / 1024, mem_available / 1024 / 1024))
+					raise self.printer.command_error("File is too large (file is %smb but only %smb of memory is available) for required IDEX post-processing. Disable the legacy post-processor to continue." % (size / 1024 / 1024, mem_available / 1024 / 1024))
 				else:
-					self.ratos_echo(echo_prefix, "File is too large for post processing (file is %smb but only %smb of memory is available), skipping.." % (size / 1024 / 1024, mem_available / 1024 / 1024))
+					self.ratos_echo(echo_prefix, "File is too large for post-processing (file is %smb but only %smb of memory is available), skipping.." % (size / 1024 / 1024, mem_available / 1024 / 1024))
 					return True
 			lines = self.get_gcode_file_lines(path)
 
@@ -635,7 +633,7 @@ class RatOS:
 			if (enable_post_processing):
 				self.ratos_echo(echo_prefix, "Done!")
 		except:
-			self.ratos_echo(echo_prefix, "Post processing error!")
+			self.ratos_echo(echo_prefix, "Post-processing error!")
 		return True
 
 	def gcode_already_processed(self, path):
