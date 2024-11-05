@@ -12,11 +12,10 @@
 	"documentationLink": "https://os.ratrig.com/docs/boards/btt/sb2209-10",
 	"fourPinFanConnectorCount": 1,
 	"driverVoltages": [24],
-	"hasMcuTempSensor": false,
 	"outputPins": [
 		{
 			"name": "part_fan_power",
-			"pin": "gpio14",
+			"pin": "gpio13",
 			"value": 0
 		}
 	],
