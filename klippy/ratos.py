@@ -260,6 +260,10 @@ class RatOS:
 					self.console_echo("Warning: " + data['title'], 'warning', data['message'])
 				if data['result'] == 'success':
 					self.last_processed_file_result = data['payload']
+					if 'firstMoveX' in data['payload']:
+						self.gcode.run_script_from_command("SET_GCODE_VARIABLE MACRO=START_PRINT VARIABLE=first_x VALUE=" + str(data['payload']['firstMoveX']))
+					if 'firstMoveY' in data['payload']:
+						self.gcode.run_script_from_command("SET_GCODE_VARIABLE MACRO=START_PRINT VARIABLE=first_y VALUE=" + str(data['payload']['firstMoveY']))
 					if 'wasAlreadyProcessed' in data['payload'] and data['payload']['wasAlreadyProcessed']:
 						self.console_echo('Post-processing completed', 'success', 'File already processed, continuing...')
 					else:
