@@ -327,7 +327,7 @@ class RatOS:
 
 			# Wait for process completion with timeout
 			eventtime = reactor.monotonic()
-			endtime = eventtime + 300.0 # 5 minute timeout
+			endtime = eventtime + 3600.0 # 30 minute timeout
 			complete = False
 
 			while eventtime < endtime:
@@ -340,7 +340,7 @@ class RatOS:
 			reactor.unregister_fd(hdl)
 			if not complete:
 				process.terminate()
-				raise self.printer.command_error("Post-processing timed out")
+				raise self.printer.command_error("Post-processing failed: Timed out")
 
 			if process.returncode != 0:
 				error = process.stderr.read().decode().strip()
@@ -348,12 +348,11 @@ class RatOS:
 					raise self.printer.command_error(
 						f"Post-processing failed: {error}"
 					)
-				raise self.printer.command_error(f"Post-processing failed")
+				raise self.printer.command_error(f"Post-processing failed: Unexpected error")
 
 			return True
 
 		except Exception as e:
-			self.console_echo('Unexpected post-processing error', 'error', str(e))
 			if enable_post_processing:
 				raise
 			return False
