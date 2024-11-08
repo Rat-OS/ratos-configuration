@@ -232,9 +232,11 @@ class RatOS:
 		try:
 			[path, size] = self.get_gcode_file_info(filename)
 			# Start ratos postprocess command
-			args = ['ratos', 'postprocess', '--non-interactive', '--overwrite-input']
+			args = ['ratos', 'postprocess', '--non-interactive']
 			isIdex = self.config.has_section("dual_carriage")
-			if isIdex and enable_post_processing:
+			if enable_post_processing:
+				args.append('--overwrite-input')
+			if isIdex:
 				args.append('--idex')
 			if self.allow_unsupported_slicer_versions:
 				args.append('--allow-unsupported-slicer-versions')
