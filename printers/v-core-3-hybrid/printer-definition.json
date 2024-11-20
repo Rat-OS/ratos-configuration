@@ -1,0 +1,164 @@
+{
+	"$schema": "../printer-definition.schema.json",
+	"name": "V-Core 3 Hybrid",
+	"description": "Rat Rig's former flagship CoreXY printer in 4 sizes with hybrid corexy kinematic.",
+	"manufacturer": "Rat Rig",
+	"documentationLink": "https://docs.ratrig.com/product-details/v-core3-1",
+	"image": "rat-rig-v-core-3.png",
+	"template": "v-core-3-hybrid-printer.template.cfg",
+	"driverCountRequired": 8,
+	"sizes": {
+		"200": {
+			"x": 200,
+			"y": 200,
+			"z": 200
+		},
+		"300": {
+			"x": 300,
+			"y": 300,
+			"z": 300
+		},
+		"400": {
+			"x": 400,
+			"y": 400,
+			"z": 400
+		},
+		"500": {
+			"x": 500,
+			"y": 500,
+			"z": 500
+		}
+	},
+	"bedMargin": {
+		"x": [0, 0],
+		"y": [0, 0]
+	},
+	"speedLimits": {
+		"basic": {
+			"accel": 3000,
+			"velocity": 300,
+			"z_accel": 15,
+			"z_velocity": 30,
+			"travel_accel": 3000,
+			"travel_velocity": 300
+		},
+		"performance": {
+			"accel": 10000,
+			"velocity": 800,
+			"z_accel": 600,
+			"z_velocity": 50,
+			"travel_velocity": 600,
+			"travel_accel": 8000
+		}
+	},
+	"kinematics": "hybrid-corexy",
+	"defaults": {
+		"board": "btt-octopus-11",
+		"toolheads": [
+			{
+				"axis": "x",
+				"description": "The V-Core toolhead",
+				"extruder": "orbiter-2",
+				"toolboard": "btt-ebb42-12",
+				"hotend": "rapido",
+				"partFan": "4pin-toolboard",
+				"hotendFan": "2pin-toolboard",
+				"probe": "superpinda",
+				"xEndstop": "endstop",
+				"yEndstop": "endstop"
+			}
+		],
+		"rails": [
+			{
+				"axis": "x",
+				"axisDescription": "The A axis motor for the toolhead, located at the rear left of the printer",
+				"current": 1.1,
+				"driver": "BTT-TMC2209-13",
+				"stepper": "LDO-42STH48-2504AC",
+				"rotationDistance": 40,
+				"homingSpeed": 50,
+				"performanceMode": {
+					"current": 1.6
+				}
+			},
+			{
+				"axis": "x1",
+				"axisDescription": "The B axis motor for the toolhead, located at the rear right of the printer",
+				"current": 1.1,
+				"driver": "BTT-TMC2209-13",
+				"stepper": "LDO-42STH48-2504AC",
+				"rotationDistance": 40,
+				"homingSpeed": 50,
+				"performanceMode": {
+					"current": 1.6
+				}
+			},
+			{
+				"axis": "y",
+				"axisDescription": "The left Y motor used for cartesian Y control in Hybrid CoreXY, located at the rear left of the printer",
+				"current": 1.1,
+				"driver": "BTT-TMC2209-13",
+				"stepper": "LDO-42STH48-2504AC",
+				"rotationDistance": 40,
+				"homingSpeed": 50,
+				"performanceMode": {
+					"current": 1.6
+				}
+			},
+			{
+				"axis": "y1",
+				"axisDescription": "The right Y motor used for cartesian Y control in Hybrid CoreXY, located at the rear right of the printer",
+				"current": 1.1,
+				"driver": "BTT-TMC2209-13",
+				"stepper": "LDO-42STH48-2504AC",
+				"rotationDistance": 40,
+				"homingSpeed": 50,
+				"performanceMode": {
+					"current": 1.6
+				}
+			},
+			{
+				"axis": "z",
+				"axisDescription": "The left Z motor for the kinematic bed",
+				"current": 1.1,
+				"driver": "BTT-TMC2209-13",
+				"stepper": "LDO-42STH48-2504AC",
+				"rotationDistance": 4,
+				"homingSpeed": 10,
+				"performanceMode": {
+					"current": 1.6
+				}
+			},
+			{
+				"axis": "z1",
+				"axisDescription": "The rear Z motor for the kinematic bed",
+				"current": 1.1,
+				"driver": "BTT-TMC2209-13",
+				"stepper": "LDO-42STH48-2504AC",
+				"rotationDistance": 4,
+				"performanceMode": {
+					"current": 1.6
+				}
+			},
+			{
+				"axis": "z2",
+				"axisDescription": "The right Z motor for the kinematic bed",
+				"current": 1.1,
+				"driver": "BTT-TMC2209-13",
+				"stepper": "LDO-42STH48-2504AC",
+				"rotationDistance": 4,
+				"performanceMode": {
+					"current": 1.6
+				}
+			},
+			{
+				"axis": "extruder",
+				"axisDescription": "The extruder motor used for pushing filament through the toolhead",
+				"rotationDistance": 0,
+				"current": 0.707,
+				"driver": "BTT-TMC2209-13",
+				"stepper": "LDO-36STH20-1004AHG"
+			}
+		]
+	}
+}
