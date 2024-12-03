@@ -81,18 +81,18 @@
 		}
 	},
 	"ADXL345SPI": {
-		"cs_pin": "PB12",
+		"cs_pin": "PC15",
 		"software": {
-			"sclk": "PB10",
-			"mosi": "PB11",
-			"miso": "PB2"
+			"sclk": "PC10",
+			"mosi": "PC12",
+			"miso": "PC11"
 		}
 	},
 	"stepperSPI": {
 		"software": {
-			"sclk": "PB10",
-			"mosi": "PB11",
-			"miso": "PB2"
+			"sclk": "PC10",
+			"mosi": "PC12",
+			"miso": "PC11"
 		}
 	}
 }
