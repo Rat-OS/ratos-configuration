@@ -1,3 +1,6 @@
+> [!WARNING]
+> This repository has been merged into the configurator, **ALL PULL REQUESTS** should go to https://github.com/Rat-OS/RatOS-configurator
+
 # RatOS Configuration
 [![CI](https://github.com/Rat-OS/RatOS-configuration/actions/workflows/ConfiguratorTests.yml/badge.svg)](https://github.com/Rat-OS/RatOS-configuration/actions/workflows/ConfiguratorTests.yml)
 
