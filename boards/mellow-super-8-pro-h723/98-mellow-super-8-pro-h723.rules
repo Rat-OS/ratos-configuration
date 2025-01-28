@@ -1,0 +1,4 @@
+# Mellow Super 8 Pro w/ STM32H723
+SUBSYSTEMS=="usb", ATTRS{idProduct}=="614e",  ATTRS{idVendor}=="1d50", ATTRS{serial}=="mellow-super-8-pro-h723", ACTION=="add", SYMLINK+="mellow-super-8-pro-h723", RUN+="/home/pi/printer_data/config/RatOS/scripts/klipper-mcu-added.sh"
+
+ACTION=="remove", ENV{DEVLINKS}=="/dev/mellow-super-8-pro-h723"

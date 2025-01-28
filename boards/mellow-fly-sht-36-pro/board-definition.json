@@ -1,0 +1,35 @@
+{
+	"$schema": "../board-definition.schema.json",
+	"boardImageFileName": "board.webp",
+	"wireDiagramFileName": "wiring.drawio.svg",
+	"isToolboard": true,
+	"name": "FLY-SHT36-PRO",
+	"manufacturer": "Mellow",
+	"id": "mellow-fly-sht-36-pro",
+	"firmwareBinaryName": "firmware-mellow-fly-sht-36-pro.bin",
+	"compileScript": "compile.sh",
+	"flashScript": "flash.sh",
+	"flashInstructions": "After initial flashing, make sure the RST jumper is not inserted.",
+	"documentationLink": "https://os.ratrig.com/docs/boards/mellow/fly-sht-36",
+	"driverCount": 1,
+	"integratedDrivers": {
+		"extruder": "MELLOW-FLY-TMC5160"
+	},
+	"dfu": {
+		"flashDevice": "0483:df11",
+		"dfuBootImage": "dfubooting.png",
+		"instructions": [
+			"Add the jumper as shown in the picture",
+			"Connect the board via USB to the Raspberry Pi",
+			"Make sure the board is powered on",
+			"If the board was already connected and powered when you inserted the jumper, click the boot button on the board."
+		],
+		"hasBoot0Jumper": true
+	},
+	"ADXL345SPI": {
+		"cs_pin": "gpio9",
+		"hardware": {
+			"bus": "spi1"
+		}
+	}
+}

@@ -1,0 +1,148 @@
+{
+	"$schema": "../board-definition.schema.json",
+	"boardImageFileName": "board.webp",
+	"manualFileName": "manual.pdf",
+	"wireDiagramFileName": "wiring.drawio.svg",
+	"name": "Mellow Super 8 Pro",
+	"manufacturer": "Mellow",
+	"id": "mellow-super-8-pro-h723",
+	"firmwareBinaryName": "firmware-mellow-super-8-pro-h723.bin",
+	"compileScript": "compile.sh",
+	"flashScript": "flash.sh",
+	"flashInstructions": "Flashing only works if the SD card slot on the Mellow Super 8 Pro is empty.",
+	"documentationLink": "https://os.ratrig.com/docs/boards/mellow/super-8-pro-h723",
+	"driverCount": 8,
+	"driverVoltages": [24, 36, 48, 56],
+	"dfu": {
+		"flashDevice": "0483:df11",
+		"dfuBootImage": "dfubooting.drawio.png",
+		"instructions": [
+			"Connect the board via USB to the Raspberry Pi",
+			"Add the jumper to BT0/3.3V as shown in the picture",
+			"Make sure the board is powered on",
+			"If the board was already connected and powered when you inserted the jumper, click the reset button on the board."
+		],
+		"hasBoot0Jumper": true
+	},
+	"motorSlots": {
+		"MOTOR0": {
+			"title": "MOTOR 0",
+			"enable_pin": "PF11",
+			"step_pin": "PE2",
+			"dir_pin": "PC5",
+			"uart_pin": "PC4",
+			"cs_pin": "PC4",
+			"diag_pin": "PG12",
+			"endstop_pin": "PG12",
+			"spi_software_mosi_pin": "PB5",
+			"spi_software_miso_pin": "PB4",
+			"spi_software_sclk_pin": "PB3"
+		},
+		"MOTOR1": {
+			"title": "MOTOR 1",
+			"enable_pin": "PF14",
+			"step_pin": "PE3",
+			"dir_pin": "PF13",
+			"uart_pin": "PF12",
+			"cs_pin": "PF12",
+			"diag_pin": "PG11",
+			"endstop_pin": "PG11",
+			"spi_software_mosi_pin": "PB5",
+			"spi_software_miso_pin": "PB4",
+			"spi_software_sclk_pin": "PB3"
+		},
+		"MOTOR2": {
+			"title": "MOTOR 2",
+			"enable_pin": "PG1",
+			"step_pin": "PE4",
+			"dir_pin": "PG0",
+			"uart_pin": "PF15",
+			"cs_pin": "PF15",
+			"diag_pin": "PG10",
+			"endstop_pin": "PG10",
+			"spi_software_mosi_pin": "PB5",
+			"spi_software_miso_pin": "PB4",
+			"spi_software_sclk_pin": "PB3"
+		},
+		"MOTOR3": {
+			"title": "MOTOR 3",
+			"enable_pin": "PE9",
+			"step_pin": "PE14",
+			"dir_pin": "PE8",
+			"uart_pin": "PE7",
+			"cs_pin": "PE7",
+			"diag_pin": "PG9",
+			"endstop_pin": "PG9",
+			"spi_software_mosi_pin": "PB5",
+			"spi_software_miso_pin": "PB4",
+			"spi_software_sclk_pin": "PB3"
+		},
+		"MOTOR4": {
+			"title": "MOTOR 4",
+			"enable_pin": "PF2",
+			"step_pin": "PE15",
+			"dir_pin": "PE11",
+			"uart_pin": "PF10",
+			"cs_pin": "PF10",
+			"diag_pin": "PD7",
+			"endstop_pin": "PD7",
+			"spi_software_mosi_pin": "PB5",
+			"spi_software_miso_pin": "PB4",
+			"spi_software_sclk_pin": "PB3"
+		},
+		"MOTOR5": {
+			"title": "MOTOR 5",
+			"enable_pin": "PC15",
+			"step_pin": "PE1",
+			"dir_pin": "PF0",
+			"uart_pin": "PF1",
+			"cs_pin": "PF1",
+			"diag_pin": "PD6",
+			"endstop_pin": "PD6",
+			"spi_software_mosi_pin": "PB5",
+			"spi_software_miso_pin": "PB4",
+			"spi_software_sclk_pin": "PB3"
+		},
+		"MOTOR6": {
+			"title": "MOTOR 6",
+			"enable_pin": "PG4",
+			"step_pin": "PE0",
+			"dir_pin": "PG3",
+			"uart_pin": "PG2",
+			"cs_pin": "PG2",
+			"diag_pin": "PA8",
+			"endstop_pin": "PA8",
+			"spi_software_mosi_pin": "PB5",
+			"spi_software_miso_pin": "PB4",
+			"spi_software_sclk_pin": "PB3"
+		},
+		"MOTOR7": {
+			"title": "MOTOR 7",
+			"enable_pin": "PG7",
+			"step_pin": "PE6",
+			"dir_pin": "PG6",
+			"uart_pin": "PG5",
+			"cs_pin": "PG5",
+			"diag_pin": "PF8",
+			"endstop_pin": "PF8",
+			"spi_software_mosi_pin": "PB5",
+			"spi_software_miso_pin": "PB4",
+			"spi_software_sclk_pin": "PB3"
+		}
+	},
+	"ADXL345SPI": {
+		"cs_pin": "PD0",
+		"software": {
+			"sclk": "PD3",
+			"mosi": "PD5",
+			"miso": "PD4"
+		}
+	},
+	"stepperSPI": {
+		"software": {
+			"sclk": "PB3",
+			"mosi": "PB5",
+			"miso": "PB4"
+		}
+	}
+}

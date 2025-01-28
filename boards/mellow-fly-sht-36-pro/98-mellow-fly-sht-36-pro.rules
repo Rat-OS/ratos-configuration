@@ -1,0 +1,4 @@
+# Mellow FLY-SHT 36 PRO
+SUBSYSTEMS=="usb", ATTRS{idProduct}=="614e",  ATTRS{idVendor}=="1d50", ATTRS{serial}=="mellow-fly-sht-36-pro", ACTION=="add", SYMLINK+="mellow-fly-sht-36-pro", RUN+="/home/pi/printer_data/config/RatOS/scripts/klipper-mcu-added.sh"
+
+ACTION=="remove", ENV{DEVLINKS}=="/dev/mellow-fly-sht-36-pro"
